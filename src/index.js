@@ -1,13 +1,55 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./App";
+import "./index.css";
+import AccountPage from "./pages/AccountPage";
+import AlbumsPage from "./pages/AlbumsPage";
+import LoginPage from "./pages/LoginPage";
+import PhotosPage from "./pages/PhotosPage";
+import reportWebVitals from "./reportWebVitals";
+const router = createBrowserRouter([
+  {
+    children: [
+      {
+        element: <PhotosPage />,
+        path: "/photos",
+      },
+      {
+        element: <AlbumsPage />,
+        path: "/albums",
+      },
+      {
+        element: <AccountPage />,
+        path: "/account",
+      },
+    ],
+    element: <App />,
+    path: "/",
+  },
+  {
+    element: <LoginPage />,
+    path: "/login",
+  },
+]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#3f51b5",
+    },
+    mode: "dark",
+  },
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
