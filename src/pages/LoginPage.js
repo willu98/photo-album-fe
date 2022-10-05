@@ -38,6 +38,9 @@ const LoginPage = () => {
     event.preventDefault();
     const responseData = await loginRequest(loginData);
     if (responseData.data.response) {
+      localStorage.setItem("user", responseData.data.response.name);
+      localStorage.setItem("token", responseData.data.response.token);
+      localStorage.setItem("expiry", responseData.data.response.expiry);
       navigate("/photos");
     } else if (responseData.data.message) {
       setLoginError(true);
@@ -128,7 +131,7 @@ const LoginPage = () => {
       />
 
       <Dialog open={loginError} onClose={() => setLoginError(false)}>
-        <DialogTitle>Register</DialogTitle>
+        <DialogTitle>Error</DialogTitle>
         <DialogContent>
           <DialogContentText>Wrong username or password</DialogContentText>
         </DialogContent>

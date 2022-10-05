@@ -9,13 +9,14 @@ import {
   Typography,
 } from "@mui/material";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import SearchBar from "./Searchbar";
 
 const Navbar = (props) => {
   const [profileMenu, setProfileMenu] = useState(false);
   const menuRef = useRef(null);
-
+  const navigate = useNavigate();
   return (
     <>
       <AppBar position="static">
@@ -49,7 +50,9 @@ const Navbar = (props) => {
           <Box sx={{ flexDirection: "row", display: "flex" }}>
             <SearchBar />
             <IconButton onClick={() => setProfileMenu(true)} ref={menuRef}>
-              <Avatar>{"S"}</Avatar>
+              <Avatar>
+                {localStorage.getItem("user").toUpperCase().charAt(0)}
+              </Avatar>
             </IconButton>
           </Box>
           <Menu
@@ -57,10 +60,17 @@ const Navbar = (props) => {
             onClose={() => setProfileMenu(false)}
             anchorEl={menuRef.current}
           >
-            <MenuItem onClick={() => alert("hey")}>
+            <MenuItem onClick={() => navigate("/account")}>
               Account Information
             </MenuItem>
-            <MenuItem onClick={() => alert("hey")}>Logout</MenuItem>
+            <MenuItem
+              onClick={() => {
+                navigate("/login");
+                localStorage.clear();
+              }}
+            >
+              Logout
+            </MenuItem>
           </Menu>
         </Box>
       </AppBar>

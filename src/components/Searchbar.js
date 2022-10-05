@@ -21,6 +21,7 @@ const SearchBar = ({ setSearchQuery }) => (
         backgroundColor: "#808080",
         "& .Mui-focused": {
           color: "#FFFFFF",
+          mr: 0,
         },
       }}
     />

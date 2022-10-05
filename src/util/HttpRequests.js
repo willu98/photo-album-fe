@@ -5,6 +5,7 @@ export const loginRequest = async (obj) => {
       "http://18.188.245.18/api/user/login/",
       obj
     );
+    console.log(responseData);
     return responseData;
   } catch (err) {
     console.log(err);
