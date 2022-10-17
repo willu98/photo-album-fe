@@ -103,6 +103,7 @@ const LoginPage = () => {
               <Box
                 sx={{
                   paddingTop: "20px",
+                  display: "flex"
                 }}
               >
                 <Button
