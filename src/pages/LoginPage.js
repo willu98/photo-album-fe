@@ -41,6 +41,7 @@ const LoginPage = () => {
       localStorage.setItem("user", responseData.data.response.name);
       localStorage.setItem("token", responseData.data.response.token);
       localStorage.setItem("expiry", responseData.data.response.expiry);
+
       navigate("/photos");
     } else if (responseData.data.message) {
       setLoginError(true);
@@ -103,7 +104,7 @@ const LoginPage = () => {
               <Box
                 sx={{
                   paddingTop: "20px",
-                  display: "flex"
+                  display: "flex",
                 }}
               >
                 <Button

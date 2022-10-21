@@ -22,6 +22,7 @@ const SearchBar = ({ setSearchQuery }) => (
         "& .Mui-focused": {
           color: "#FFFFFF",
           mr: 0,
+          padding: 0,
         },
       }}
     />
