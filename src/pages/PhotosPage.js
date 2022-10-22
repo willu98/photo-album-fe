@@ -14,11 +14,25 @@ const PhotosPage = () => {
   }, []);
 
   return (
-    <Box sx={{ width: 300 }}>
-      {loadedPhotos &&
-        loadedPhotos.map((photo) => (
-          <PhotoCard key={photo.file_url} img={photo.file_url} alt="test" />
-        ))}
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignSelf: "center",
+          alignItems: "center",
+          flexDirection: "row",
+        }}
+      >
+        {loadedPhotos &&
+          loadedPhotos.map((photo) => (
+            <PhotoCard
+              key={photo.file_url}
+              img={photo.file_url}
+              alt={photo.file_url}
+              fileName={photo.user_filename}
+            />
+          ))}
+      </Box>
     </Box>
   );
 };
