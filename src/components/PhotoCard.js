@@ -1,44 +1,42 @@
-import { Box } from "@mui/system";
+import { Card, CardMedia, Typography } from "@mui/material";
 
 export const PhotoCard = (props) => {
   return (
-    <Box>
-      <img src={props.img} alt={props.alt} />
-    </Box>
-    /*
     <Card
       sx={{
-        maxHeight: "200px",
-        maxWidth: "200px",
+        height: "200px",
+        width: "250px",
         flexDirection: "column",
         display: "flex",
       }}
     >
-      <Box sx={{ height: "100%" }}>
-        <CardMedia component={"img"} image={props.img} alt={props.alt} />
-      </Box>
-      <CardContent
+      <CardMedia
+        component={"img"}
+        image={props.img}
+        alt={props.alt}
         sx={{
           display: "flex",
-          maxHeight: "20%",
-          width: "100%",
-          backgroundColor: "#FFFFFF",
+          height: "100%",
+          minHeight: "0",
+          objectFit: "contain",
+        }}
+      />
+      <Typography
+        variant="h6"
+        sx={{
+          textAlign: "center",
+          fontFamily: "monospace",
+          fontWeight: 600,
+          color: "inherit",
+          textDecoration: "none",
+          height: "80px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <Typography
-          variant="h6"
-          sx={{
-            width: "100%",
-            textAlign: "center",
-            fontFamily: "monospace",
-            fontWeight: 600,
-            color: "inherit",
-            textDecoration: "none",
-          }}
-        >
-          {props.fileName}
-        </Typography>
-      </CardContent>
-    </Card>*/
+        {props.fileName}
+      </Typography>
+    </Card>
   );
 };
