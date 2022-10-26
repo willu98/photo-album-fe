@@ -11,12 +11,9 @@ import {
 } from "@mui/material";
 
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { uploadPhoto } from "./HttpRequests";
+import { getPhotoByURL, uploadPhoto } from "./HttpRequests";
 
-const ImageUpload = () => {
-  const navigate = useNavigate();
-
+const ImageUpload = ({ getNewPhoto }) => {
   const [image, setImage] = useState(null);
   const [fileName, setFileName] = useState();
   const [imgURL, setImgURL] = useState("");
@@ -44,7 +41,8 @@ const ImageUpload = () => {
     formData.set("file", image);
     const response = await uploadPhoto(formData, fileName);
     if (response.data.response) {
-      navigate("/photos");
+      const photo = await getPhotoByURL(response.data.response.file_url);
+      getNewPhoto(photo);
       setOpenModal(false);
     }
   };
@@ -85,7 +83,7 @@ const ImageUpload = () => {
           />
         </DialogContent>
         <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
-          <Button variant="contained" type="submit" onClick={handleSubmit}>
+          <Button variant="contained" onClick={handleSubmit}>
             Upload Photo
           </Button>
         </DialogActions>

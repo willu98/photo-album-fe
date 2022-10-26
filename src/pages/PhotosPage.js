@@ -5,18 +5,21 @@ import { getPhotos } from "../util/HttpRequests";
 import ImageUpload from "../util/ImageUpload";
 
 const PhotosPage = () => {
-  const [loadedPhotos, setLoadedPhotos] = useState();
+  const [loadedPhotos, setLoadedPhotos] = useState([]);
 
-  //setup backend to send filename as well
-  //setup getter for img by filename
-  //also do delete by filename instead of id
-  //setup child->parent function
-  //const getNewPhoto = ()
+  //complete delete button
+  //also do delete by filename instead of id-done
+
+  const getNewPhoto = (photo) => {
+    setLoadedPhotos((prev) => {
+      return [...prev, photo].reverse();
+    });
+  };
 
   useEffect(() => {
     const loadPhotos = async () => {
       const photos = await getPhotos();
-      setLoadedPhotos(photos);
+      setLoadedPhotos(photos.reverse());
     };
     loadPhotos();
   }, []);
@@ -24,7 +27,7 @@ const PhotosPage = () => {
   return (
     <Grid container spacing={4} sx={{ mt: 1 }}>
       <Grid item xs={12} sm={6} md={2} align="center">
-        <ImageUpload />
+        <ImageUpload getNewPhoto={getNewPhoto} />
       </Grid>
 
       {loadedPhotos &&

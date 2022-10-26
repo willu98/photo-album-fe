@@ -17,9 +17,23 @@ export const getPhotos = async () => {
   }
 };
 
+export const getPhotoByURL = async (file_url) => {
+  try {
+    const responseData = await axios.get(
+      `http://18.188.245.18/api/photos/url/?file_url=${file_url}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    );
+    console.log(responseData.data.response);
+    return responseData.data.response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const uploadPhoto = async (obj, user_filename) => {
   try {
-    console.log(obj.getAll("file"));
     const responseData = await axios.post(
       `http://18.188.245.18/api/photos/?user_filename=${user_filename}`,
       obj,
@@ -35,6 +49,8 @@ export const uploadPhoto = async (obj, user_filename) => {
     console.log(err);
   }
 };
+
+export const deletePhoto = async (obg) => {};
 
 export const loginRequest = async (obj) => {
   try {

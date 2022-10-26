@@ -33,7 +33,7 @@ const Navbar = (props) => {
             <Typography
               variant="h6"
               component="a"
-              href="/"
+              href="/photos"
               sx={{
                 mr: 2,
                 alignSelf: "center",
