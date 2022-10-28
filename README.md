@@ -2,6 +2,8 @@
 
 A single page web app that allows users to upload and view pictures in their albums. Built using Postgres, AWS S3 and FastAPI on the backend & React with Material UI for the front end
 
+### Backend repository can be found [HERE](https://github.com/willu98/Photo-Album-be)
+
 ## Features
 * Login and registration page with JWT auth
 
