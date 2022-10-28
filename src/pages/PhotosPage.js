@@ -16,6 +16,13 @@ const PhotosPage = () => {
     });
   };
 
+  const removeUserPhoto = (url) => {
+    setLoadedPhotos((prev) => {
+      const newPhotos = prev.filter((photo) => photo.file_url !== url);
+      return newPhotos;
+    });
+  };
+
   useEffect(() => {
     const loadPhotos = async () => {
       const photos = await getPhotos();
@@ -27,7 +34,7 @@ const PhotosPage = () => {
   return (
     <Grid container spacing={4} sx={{ mt: 1 }}>
       <Grid item xs={12} sm={6} md={2} align="center">
-        <ImageUpload getNewPhoto={getNewPhoto} />
+        <ImageUpload getNewPhoto={getNewPhoto} upload={true} />
       </Grid>
 
       {loadedPhotos &&
@@ -37,6 +44,7 @@ const PhotosPage = () => {
               img={photo.file_url}
               alt={photo.file_url}
               fileName={photo.user_filename}
+              removeUserPhoto={removeUserPhoto}
             />
           </Grid>
         ))}

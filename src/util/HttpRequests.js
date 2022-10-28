@@ -25,7 +25,6 @@ export const getPhotoByURL = async (file_url) => {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       }
     );
-    console.log(responseData.data.response);
     return responseData.data.response;
   } catch (err) {
     console.log(err);
@@ -50,7 +49,18 @@ export const uploadPhoto = async (obj, user_filename) => {
   }
 };
 
-export const deletePhoto = async (obg) => {};
+export const deletePhoto = async (file_url) => {
+  try {
+    await axios.delete(
+      `http://18.188.245.18/api/photos/delete/?file_url=${file_url}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const loginRequest = async (obj) => {
   try {

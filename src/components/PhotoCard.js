@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useRef, useState } from "react";
+import { deletePhoto } from "../util/HttpRequests";
+
 export const PhotoCard = (props) => {
   const [photoMenu, setPhotoMenu] = useState(false);
   const menuRef = useRef(null);
@@ -32,7 +34,14 @@ export const PhotoCard = (props) => {
           >
             <MenuItem>Update Info</MenuItem>
             <MenuItem>Add to Album</MenuItem>
-            <MenuItem>Delete Photo</MenuItem>
+            <MenuItem
+              onClick={() => {
+                deletePhoto(props.img);
+                props.removeUserPhoto(props.img);
+              }}
+            >
+              Delete Photo
+            </MenuItem>
           </Menu>
         </Box>
         <Box

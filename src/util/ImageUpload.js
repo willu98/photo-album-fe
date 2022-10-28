@@ -13,7 +13,7 @@ import {
 import React, { useRef, useState } from "react";
 import { getPhotoByURL, uploadPhoto } from "./HttpRequests";
 
-const ImageUpload = ({ getNewPhoto }) => {
+const ImageUpload = (props) => {
   const [image, setImage] = useState(null);
   const [fileName, setFileName] = useState();
   const [imgURL, setImgURL] = useState("");
@@ -38,12 +38,16 @@ const ImageUpload = ({ getNewPhoto }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    formData.set("file", image);
-    const response = await uploadPhoto(formData, fileName);
-    if (response.data.response) {
-      const photo = await getPhotoByURL(response.data.response.file_url);
-      getNewPhoto(photo);
-      setOpenModal(false);
+    if (props.upload) {
+      formData.set("file", image);
+      const response = await uploadPhoto(formData, fileName);
+      if (response.data.response) {
+        const photo = await getPhotoByURL(response.data.response.file_url);
+        props.getNewPhoto(photo);
+        setOpenModal(false);
+      }
+    } else {
+      console.log("update");
     }
   };
 
@@ -68,7 +72,9 @@ const ImageUpload = ({ getNewPhoto }) => {
           setOpenModal(false);
         }}
       >
-        <DialogTitle align="center">Upload Your Photo</DialogTitle>
+        <DialogTitle align="center">
+          {props.upload ? "Upload Your Photo" : "Update Info"}
+        </DialogTitle>
         <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
           <img height="200" width="250" src={imgURL} alt=""></img>
           <TextField
@@ -84,7 +90,7 @@ const ImageUpload = ({ getNewPhoto }) => {
         </DialogContent>
         <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
           <Button variant="contained" onClick={handleSubmit}>
-            Upload Photo
+            {props.upload ? "Upload Photo" : "Update"}
           </Button>
         </DialogActions>
       </Dialog>
